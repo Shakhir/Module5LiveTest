@@ -1,42 +1,36 @@
-void main(List<String> arguments) {
-  // Example usage:
-  Circle myCircle = Circle(5.0);
-  print('Radius: ${myCircle.radius}');
-  print('Area: ${myCircle.area}'); // Accessing the area getter
-
-  myCircle.radius = 7.0;
-  print('New Radius: ${myCircle.radius}');
-  print('New Area: ${myCircle.area}');
-}
 
 abstract class Shape {
+  double _area = 0.0;
 
-  double get area;
-  void  area();
+  double area();
 
+  void setArea(double value) {
+    _area = value;
+  }
+
+  double getArea() {
+    return _area;
+  }
 }
 
-class Circle implements Shape {
+class Circle extends Shape {
   double _radius;
 
   Circle(this._radius);
 
-  double get radius => _radius;
 
-  set radius(double value) {
-    if (value >= 0) {
-      _radius = value;
-    } else {
-      print("Radius cannot be negative.");
-    }
-  }
-
-  @override
-  double get area {
-    return 3.1416 * _radius * _radius;
-  }
   @override
   double area() {
-    print("Area ")
+    double calculatedArea = 3.1416 * _radius * _radius;
+    setArea(calculatedArea);
+    return calculatedArea;
   }
+}
+
+void main() {
+  var circle = Circle(5);
+
+  print("The area of the circle is: ${circle.area()}");
+
+  print("Geter: ${circle.getArea()}");
 }
